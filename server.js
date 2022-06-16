@@ -41,6 +41,9 @@ app.get("/api/toplist", (req, res)=>{
     res.json(teaList)
 })
 
+app.get("/api/validate",authorizeToken ,  (req, res)=>{
+    res.json(req.user)
+})
 
 app.listen(PORT, ()=>{
     console.log(`Server is running at port ${PORT}`);

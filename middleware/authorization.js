@@ -6,21 +6,25 @@ export const authorizeToken = (req, res, next) =>{
 
     const authHeader = req.headers["authorization"];
 
+    console.log(authHeader)
     // req.headers["authorization"] : Bearer "then the token" bearer and token will be combined string
 
-    const token = authHeader && authHeader.split(" ")[1];
+    // in case of Bearere
+   // const token = authHeader && authHeader.split(" ")[1];
 
-    if(token == null) return res.statusCode(401)
+   const token = authHeader;
+
+
+    if(token == null) return res.sendStatus(401)
 
     jwt.verify(token, process.env.ACCESS_SECRET, (err, user) => {
 
         if(err) return res.sendStatus(403) ; // Forbbiden 
 
-        req.user =   user;
+        req.user =   user && user.fullName;
 
         next()
     })
-    console.log("token in get middleware request", token)
     
     next();
 }
@@ -44,7 +48,7 @@ export const generateToken = (req,res) =>{
         const accessToken =  jwt.sign(userPayload, process.env.ACCESS_SECRET);
         req.accessToken = accessToken;
         
-    res.json({accessToken})
+    res.json({accessToken,userName:currentUser.fullName})
 
 
     // After Authentication we authorize the user 

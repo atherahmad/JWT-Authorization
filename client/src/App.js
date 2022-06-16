@@ -2,10 +2,11 @@ import './App.css';
 import SigninComponent from './components/SigninComponent';
 import SignupComponent from './components/SignupComponent';
 import TeaListComponent from './components/TeaListComponent';
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LayoutComponent from './components/LayoutComponent';
 import UserContext from './context/userContext';
-import {useState} from "react"
+import {useState, useEffect} from "react"
+import FavoriteComponent from './components/FavoriteComponent';
 
 
 
@@ -13,8 +14,24 @@ function App() {
 
   const [userProfile, setUserProfile] = useState({
     userName:"",
-    authorized:true
+    authorized:false
   });
+
+  const [errorMessage, setErrorMessage] = useState("")
+
+  useEffect(()=>{
+    if(localStorage.getItem("accessToken")) 
+      fetch("http://localhost:5000/api/validate",{
+        headers: {  "Authorization": localStorage.getItem("accessToken")  }
+      }
+      )
+      .then(response=>{
+          if(response.ok) return response.json()
+          else throw new Error(response.statusText)
+        })
+      .then(data=>setAuthenticated(data))
+      .catch(err=>setErrorMessage(err))
+},[])
 
   const setAuthenticated = (profileName) => {
     setUserProfile({
@@ -36,10 +53,11 @@ function App() {
       <Routes>
         <Route path='/' element={<LayoutComponent />}>
           <Route path="signup" element={<SignupComponent />} />
-          <Route path="signin" element={<SigninComponent />} >
-            {userProfile.authorized ? <Navigate to="/" />:null}
-          </Route>
+          <Route path="signin" element={<SigninComponent />} />
           <Route path="tealist" element={<TeaListComponent />} />
+          <Route path="myfavorites" element={<FavoriteComponent />} />
+          <Route path="*" element={<TeaListComponent />} />
+
         </Route>
       </Routes>
     </BrowserRouter>
