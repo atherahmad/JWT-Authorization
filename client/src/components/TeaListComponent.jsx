@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react'
+import TeaDetailsComponent from './TeaDetailsComponent';
 
 function TeaListComponent(props) {
 
@@ -18,9 +19,12 @@ function TeaListComponent(props) {
     return (
         <div>
             <h3>Top Tea List</h3>
-            <ul>
-                {teaList.map((item)=><li key={item.teaId}>{item.teaName}</li>)}
+            <ul className='myList'>
+                {teaList.map((item)=>
+                <TeaDetailsComponent key={item.teaId} teaDetails={item} favoriteHandler={()=>console.log(item)}/>
+                )}
             </ul>
+            
         </div>
     )
 }
