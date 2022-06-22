@@ -1,0 +1,9 @@
+{
+    "app": {
+
+            "port" : 6065
+    },
+    "jwt_secret":{
+        "access":"193c297d7e26ebb51f28612e51fd55fcaacd17d99e48f264d269d2f6c4d04a53f1ef22815e98afe52e4721423656480d74b2dc21286a327c1e5c970ebe5b5c46"
+    }
+}

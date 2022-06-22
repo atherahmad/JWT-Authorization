@@ -2,6 +2,8 @@
 
 import express from "express";
 
+import config from "config";
+
 import {} from "dotenv/config";
 
 import cors from "cors";
@@ -16,7 +18,9 @@ const app = express();
 
 // PORT declaration
 
-const PORT = process.env.PORT || 4000;
+//const PORT = process.env.PORT || 4000;
+
+ const PORT = 6068 || config.get('app.port') 
 
 app.use(cors())
 // parsing the body with express bodyParser
