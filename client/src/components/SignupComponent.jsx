@@ -1,20 +1,29 @@
-import React, {useState} from 'react'
+import React, {useState,useEffect,useContext} from 'react'
+import { useNavigate } from 'react-router-dom';
+import UserContext from '../context/userContext';
 import ButtonComponent from './ButtonComponent'
 import InputComponent from './InputComponent'
 
 function SignupComponent() {
 
     const [userData, setUserData] = useState({});
+    const userContext = useContext(UserContext);
+    const navigate = useNavigate();
+    const [authorized, setAuthorized] = useState(false)
+    const [err, setError] = useState("")
+
+    useEffect(()=>{
+        setAuthorized(userContext[0].authorized)
+        if(authorized) navigate("/")
+    }, [authorized])
 
     const changeHandler = (e) =>{
-        console.log(e.target.name)
         setUserData((oldState)=>{
             return {
                 ...oldState,[e.target.name]:e.target.value}})
     }
 
     const submitHandler = () =>{
-        console.log(userData)
 
         fetch("http://localhost:5000/api/signup", {
     method: 'POST',
@@ -23,7 +32,12 @@ function SignupComponent() {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(userData)
-  });
+  })
+  .then(response=>{
+    if(response.ok) navigate("/signin")
+    else throw new Error(response.statusText)
+    })
+    .catch(err=>setError(err))
 
 
     }

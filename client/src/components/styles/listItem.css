@@ -1,0 +1,46 @@
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+.test{
+    background-color:aqua;
+    list-style: none;
+    height: 100%;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.myList{
+    display: flex;
+    flex-direction: column ;
+    justify-content: center;
+    align-items: center;
+}
+.myListContainer{
+    display: flex;
+    height: 50px;
+    margin:5px;
+
+
+}
+
+
+.my-image{
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 100%;
+    background-color: red;
+
+}
+p{
+    
+}
+.image-box{
+color: rgb(187, 175, 175);
+    margin-left: 2px;
+}

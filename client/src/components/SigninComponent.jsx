@@ -3,16 +3,17 @@ import { useContext } from 'react';
 import UserContext from '../context/userContext';
 import ButtonComponent from './ButtonComponent'
 import InputComponent from './InputComponent'
-import { Navigate } from 'react-router-dom'
+import {  useNavigate } from 'react-router-dom'
 
 function SigninComponent() {
 
     const [userData, setUserData] = useState({});
-    const userContext = useContext(UserContext);
-    console.log(userContext)
+    const [user, _ , setAuthenticated] = useContext(UserContext);
+    const navigate = useNavigate()
+    console.log("user context in signin",user)
 
     useEffect(()=>{
-        if(userContext[0].authorized) <Navigate to="/" />
+        if(user.authorized) navigate("/")
     }, [])
 
     const changeHandler = (e) =>{
@@ -38,7 +39,11 @@ function SigninComponent() {
     throw new Error(response.statusText)
 
     })
-    .then(data=>localStorage.setItem("accessToken", data.accessToken))
+    .then(data=>{
+        localStorage.setItem("accessToken", data.accessToken)
+        setAuthenticated(data.userName);
+        navigate("/");
+    })
     .catch(err=>console.log(err))
 
 
