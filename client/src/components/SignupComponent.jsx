@@ -25,7 +25,7 @@ function SignupComponent() {
 
     const submitHandler = () =>{
 
-        fetch("http://localhost:5000/api/signup", {
+        fetch("/api/signup", {
     method: 'POST',
     headers: {
       'Accept': 'application/json',

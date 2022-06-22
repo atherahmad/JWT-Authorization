@@ -20,7 +20,7 @@ export default function FavoriteComponent() {
     
   return (
     <div>
-        <h2 onClick={()=>setUnauthorized()}>
+        <h2>
             Your Favorite Tea List!
         </h2>
         <ul >
@@ -31,6 +31,7 @@ export default function FavoriteComponent() {
             </li>
             )}
         </ul>
+        
     </div>
   )
 }

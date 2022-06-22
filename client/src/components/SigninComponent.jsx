@@ -26,7 +26,7 @@ function SigninComponent() {
     const submitHandler = () =>{
         console.log(userData)
 
-        fetch("http://localhost:5000/api/signin", {
+        fetch("/api/signin", {
     method: 'POST',
     headers: {
       'Accept': 'application/json',

@@ -6,7 +6,6 @@ export const authorizeToken = (req, res, next) =>{
 
     const authHeader = req.headers["authorization"];
 
-    console.log(authHeader)
     // req.headers["authorization"] : Bearer "then the token" bearer and token will be combined string
 
     // in case of Bearere
@@ -21,28 +20,28 @@ export const authorizeToken = (req, res, next) =>{
 
         if(err) return res.sendStatus(403) ; // Forbbiden 
 
-        req.user =   user && user.fullName;
+        req.userName =   user && user.userName;
 
         next()
     })
     
-    next();
 }
 
 export const generateToken = (req,res) =>{
 
         // Authentication : to verify who is the user , we will authenticate with e.g. passport.js
 
-        const userName = req.body.userName;
-        const password = req.body.password;
         console.log(req.body)
-        console.log(users)
+        const userName = req.body.username;
+        const password = req.body.password;
+
         const currentUser =users.find(user=>user.userName === userName && user.password === password)
         if(!currentUser) {
             return     res.sendStatus(403)}
 
         const userPayload = {
-            fullName: currentUser.fullName
+            fullName: currentUser.fullName,
+            userName: currentUser.userName
         };
     
         const accessToken =  jwt.sign(userPayload, process.env.ACCESS_SECRET);
