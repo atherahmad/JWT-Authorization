@@ -10,7 +10,6 @@ function SigninComponent() {
     const [userData, setUserData] = useState({});
     const [user, _ , setAuthenticated] = useContext(UserContext);
     const navigate = useNavigate()
-    console.log("user context in signin",user)
 
     useEffect(()=>{
         if(user.authorized) navigate("/")
@@ -26,7 +25,7 @@ function SigninComponent() {
     const submitHandler = () =>{
         console.log(userData)
 
-        fetch("/api/signin", {
+        fetch("/api/auth/signin", {
     method: 'POST',
     headers: {
       'Accept': 'application/json',

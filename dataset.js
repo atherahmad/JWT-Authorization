@@ -39,3 +39,4 @@ export const removeFavorites = (req,res) =>{
             res.json("successfully unfavoritted")
         }
     }
+

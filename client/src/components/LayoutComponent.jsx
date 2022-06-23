@@ -1,5 +1,5 @@
 import React, {useContext, useState, useEffect} from 'react'
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link , useNavigate} from "react-router-dom";
 import UserContext from '../context/userContext';
 import ButtonComponent from './ButtonComponent';
 
@@ -11,16 +11,19 @@ function LayoutComponent() {
   const [authorized, setAuthorized] = useState(false)
 
   const userContext = useContext(UserContext);
+  const navigate= useNavigate();
 
   useEffect(()=>{
       setAuthorized(userContext[0].authorized);
       setUserName(userContext[0].userName)
-      console.log("layout", user)
+
   })
 
   const signoutHandler = ( ) => {
     setUnauthenticated()
-    localStorage.removeItem("accessToken")}
+    localStorage.removeItem("accessToken")
+    navigate("/")
+  }
 
     return (
        <>

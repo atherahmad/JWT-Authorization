@@ -25,7 +25,7 @@ function SignupComponent() {
 
     const submitHandler = () =>{
 
-        fetch("/api/signup", {
+        fetch("/api/auth/signup", {
     method: 'POST',
     headers: {
       'Accept': 'application/json',

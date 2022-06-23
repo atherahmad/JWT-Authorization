@@ -12,7 +12,14 @@ function TeaListComponent(props) {
 
         if(!localStorage.getItem("accessToken")) return setErrorMessage("Please login to favorite the item!")
         const updateFavorite = !e.target.style.color ? "set" : "unset"
-        axios.post(`/api/auth/favorite/${updateFavorite}`,{teaId:e.target.id},{headers: {  "Authorization": localStorage.getItem("accessToken")  }})
+        axios.post(`/api/favorite/${updateFavorite}`,
+            {   
+                teaId:e.target.id
+            },
+            {
+                headers: 
+                    {"Authorization": localStorage.getItem("accessToken")  }
+                })
         .then(response=>{
           if(response.data) {
            
@@ -25,7 +32,7 @@ function TeaListComponent(props) {
 
     useEffect(()=>{
 
-        fetch("/api/toplist")
+        fetch("/api/tea/all")
         .then(response=>{
             if (response.ok) return response.json()
             else new Error(response.message)
@@ -34,7 +41,7 @@ function TeaListComponent(props) {
         .catch(err=>setErrorMessage(err))
 
         if(localStorage.getItem("accessToken")){
-            fetch("/api/getfavorite",{
+            fetch("/api/favorite/list",{
                 headers: {  "Authorization": localStorage.getItem("accessToken")  }  
             })
             .then(response=>{
@@ -42,7 +49,6 @@ function TeaListComponent(props) {
                 else new Error(response.message)
             })
             .then(data=>{
-                console.log(data, "datra")
                 setFavoriteList(data)})
             .catch(err=>setErrorMessage(err))
         }
@@ -57,7 +63,7 @@ function TeaListComponent(props) {
                 )}
             </ul>
             {errorMessage}
-            {favoriteList.map(item=><p>{item}</p>)}
+
         </div>
     )
 }

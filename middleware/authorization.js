@@ -1,5 +1,7 @@
 import jwt from "jsonwebtoken";
 import { users } from "../dataset.js";
+import generateToken from "../helpers/generateToken.js";
+
 
 
 export const authorizeToken = (req, res, next) =>{
@@ -19,35 +21,31 @@ export const authorizeToken = (req, res, next) =>{
     jwt.verify(token, process.env.ACCESS_SECRET, (err, user) => {
 
         if(err) return res.sendStatus(403) ; // Forbbiden 
-
         req.userName =   user && user.userName;
+        req.fullName =   user && user.fullName;
 
         next()
     })
     
 }
 
-export const generateToken = (req,res) =>{
+export const loginHandler =  (req,res) =>{
 
         // Authentication : to verify who is the user , we will authenticate with e.g. passport.js
 
-        console.log(req.body)
         const userName = req.body.username;
         const password = req.body.password;
 
         const currentUser =users.find(user=>user.userName === userName && user.password === password)
-        if(!currentUser) {
-            return     res.sendStatus(403)}
 
-        const userPayload = {
-            fullName: currentUser.fullName,
-            userName: currentUser.userName
-        };
-    
-        const accessToken =  jwt.sign(userPayload, process.env.ACCESS_SECRET);
-        req.accessToken = accessToken;
+        if(!currentUser) return     res.sendStatus(403).json("Forbidden")
+        const token =  generateToken({fullName :currentUser.fullName, userName: currentUser.userName})
+
+        if(!token) return res.status(401).json("Access denied")
+            
+        else res.status(200).json({accessToken:token,userName:currentUser.fullName})
         
-    res.json({accessToken,userName:currentUser.fullName})
+        
 
 
     // After Authentication we authorize the user 

@@ -21,7 +21,7 @@ function App() {
 
   useEffect(()=>{
     if(localStorage.getItem("accessToken")) 
-      fetch("/api/validate",{
+      fetch("/api/auth/validate",{
         headers: {  "Authorization": localStorage.getItem("accessToken")  }
       }
       )
@@ -30,7 +30,9 @@ function App() {
           else throw new Error(response.statusText)
         })
       .then(data=>setAuthenticated(data))
-      .catch(err=>setErrorMessage(err))
+      .catch(err=>{
+        localStorage.removeItem("accessToken")
+        setErrorMessage(err)})
 },[])
 
   const setAuthenticated = (profileName) => {
