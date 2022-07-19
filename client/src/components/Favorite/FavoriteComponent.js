@@ -1,8 +1,8 @@
 import axios from 'axios';
 import React, {useEffect, useState, useContext} from 'react'
 import {  useNavigate } from 'react-router-dom';
-import UserContext from '../context/userContext'
-import TeaDetailsComponent from './TeaDetailsComponent';
+import UserContext from '../../context/userContext'
+import TeaDetailsComponent from '../TeaComponents/TeaBox/TeaDetailsComponent';
 
 export default function FavoriteComponent() {
 

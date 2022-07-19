@@ -1,7 +1,7 @@
 import React, {useContext, useState, useEffect} from 'react'
 import { Outlet, Link , useNavigate} from "react-router-dom";
-import UserContext from '../context/userContext';
-import ButtonComponent from './ButtonComponent';
+import UserContext from '../../context/userContext';
+import ButtonComponent from '../InputComponents/Button/ButtonComponent';
 
 
 function LayoutComponent() {

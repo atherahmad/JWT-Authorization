@@ -5,6 +5,7 @@ import express from "express";
 import config from "config";
 
 import {} from "dotenv/config";
+import {dirname} from "path"
 
 import cors from "cors";
 
@@ -33,6 +34,8 @@ app.use(express.json())
 app.use("/api/tea", teaRoute)
 app.use("/api/auth",authRoute)
 app.use("/api/favorite", favoriteRoute)
+
+
 
 
 

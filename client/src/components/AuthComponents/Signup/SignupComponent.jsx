@@ -1,8 +1,8 @@
 import React, {useState,useEffect,useContext} from 'react'
 import { useNavigate } from 'react-router-dom';
-import UserContext from '../context/userContext';
-import ButtonComponent from './ButtonComponent'
-import InputComponent from './InputComponent'
+import UserContext from '../../../context/userContext';
+import ButtonComponent from '../../InputComponents/Button/ButtonComponent'
+import InputComponent from '../../InputComponents/Input/InputComponent'
 
 function SignupComponent() {
 

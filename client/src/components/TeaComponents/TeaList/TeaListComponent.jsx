@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import TeaDetailsComponent from './TeaDetailsComponent';
+import TeaDetailsComponent from '../TeaBox/TeaDetailsComponent';
 import axios from 'axios';
 
 function TeaListComponent(props) {

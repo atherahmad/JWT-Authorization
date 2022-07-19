@@ -1,9 +1,10 @@
 import React, {useState,useEffect} from 'react'
 import { useContext } from 'react';
-import UserContext from '../context/userContext';
-import ButtonComponent from './ButtonComponent'
-import InputComponent from './InputComponent'
+import UserContext from '../../../context/userContext';
+import ButtonComponent from '../../InputComponents/Button/ButtonComponent'
+import InputComponent from '../../InputComponents/Input/InputComponent'
 import {  useNavigate } from 'react-router-dom'
+import Cookies from "js-cookie"
 
 function SigninComponent() {
 
@@ -34,6 +35,7 @@ function SigninComponent() {
     body: JSON.stringify(userData)
   })
   .then(response=>{
+    console.log("cookies", Cookies.get("accessTok"))
     if(response.ok)return response.json()
     throw new Error(response.statusText)
 

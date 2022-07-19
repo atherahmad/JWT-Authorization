@@ -1,12 +1,13 @@
 import './App.css';
-import SigninComponent from './components/SigninComponent';
-import SignupComponent from './components/SignupComponent';
-import TeaListComponent from './components/TeaListComponent';
+import SigninComponent from './components/AuthComponents/Login/SigninComponent';
+import SignupComponent from './components/AuthComponents/Signup/SignupComponent';
+import TeaListComponent from './components/TeaComponents/TeaList/TeaListComponent';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import LayoutComponent from './components/LayoutComponent';
+import LayoutComponent from './components/NavBar/LayoutComponent';
 import UserContext from './context/userContext';
 import {useState, useEffect} from "react"
-import FavoriteComponent from './components/FavoriteComponent';
+import FavoriteComponent from './components/Favorite/FavoriteComponent';
+import TeaDetails from './components/TeaComponents/TeaDetails/TeaDetails';
 
 
 
@@ -58,7 +59,9 @@ function App() {
           <Route path="signin" element={<SigninComponent />} />
           <Route path="tealist" element={<TeaListComponent />} />
           <Route path="myfavorites" element={<FavoriteComponent />} />
-          <Route path="*" element={<TeaListComponent />} />
+          <Route path='teadetails/:id' element={<TeaDetails />} />
+          <Route path='*' element={<TeaListComponent />} />
+
 
         </Route>
       </Routes>

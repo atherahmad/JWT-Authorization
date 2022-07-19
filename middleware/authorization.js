@@ -38,12 +38,14 @@ export const loginHandler =  (req,res) =>{
 
         const currentUser =users.find(user=>user.userName === userName && user.password === password)
 
+
         if(!currentUser) return     res.sendStatus(403).json("Forbidden")
         const token =  generateToken({fullName :currentUser.fullName, userName: currentUser.userName})
 
         if(!token) return res.status(401).json("Access denied")
-            
-        else res.status(200).json({accessToken:token,userName:currentUser.fullName})
+        
+        res.cookie("accessTok", token)
+        res.status(200).json({accessToken:token,userName:currentUser.fullName})
         
         
 

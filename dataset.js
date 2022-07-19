@@ -5,11 +5,15 @@ export const users = [
 export const teaList = [
     {
         teaName : "Black Tea",
-        teaId : 1
+        teaId : 1,
+        ingredients : ["blackLeaf", "Sugar", "Lemon"],
+        recipe:"add something in"
     },
     {
         teaName : "Ginger Tea",
-        teaId : 2
+        teaId : 2,
+        ingredients : ["Ginger", "sugar", "Lemon"],
+        recipe:"Please add something"
     }
 ]
 
