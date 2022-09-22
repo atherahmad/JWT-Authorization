@@ -3,6 +3,7 @@ import { users } from "../dataset.js";
 import generateToken from "../helpers/generateToken.js";
 
 
+const NODE_ENV = process.env.NODE_ENV
 
 export const authorizeToken = (req, res, next) =>{
 
@@ -39,12 +40,18 @@ export const loginHandler =  (req,res) =>{
         const currentUser =users.find(user=>user.userName === userName && user.password === password)
 
 
-        if(!currentUser) return     res.sendStatus(403).json("Forbidden")
+        if(!currentUser) return  res.sendStatus(403).json("Forbidden")
+        console.log("reactd")
         const token =  generateToken({fullName :currentUser.fullName, userName: currentUser.userName})
 
         if(!token) return res.status(401).json("Access denied")
         
-        res.cookie("accessTok", token)
+        const cookieOptions = {
+            expires: new Date(Date.now()+ 3600000),
+            secure: NODE_ENV === "production" ? true : false,
+            httpOnly: NODE_ENV === "production" ? true : false
+        }
+        res.cookie("accessTok", token,cookieOptions)
         res.status(200).json({accessToken:token,userName:currentUser.fullName})
         
         
@@ -53,4 +60,7 @@ export const loginHandler =  (req,res) =>{
     // After Authentication we authorize the user 
 
     // Authorization : to check the user either he is authorized for the request or page (with JWT)
+}
+export const validateToken=(req, res)=>{
+    res.json(req.fullName)
 }

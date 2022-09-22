@@ -1,13 +1,11 @@
 import express from "express";
 const router = express.Router();
-import { authorizeToken, loginHandler, } from "../middleware/authorization.js";
+import { authorizeToken, loginHandler, validateToken } from "../middleware/authorization.js";
 import {setUser} from "../dataset.js"
 
 
 router.post("/signin", loginHandler);
-router.get("/validate",authorizeToken ,  (req, res)=>{
-    res.json(req.fullName)
-})
+router.get("/validate", authorizeToken, validateToken)
 router.post("/signup", (req,res)=>{
     setUser({
         userName:req.body.username,

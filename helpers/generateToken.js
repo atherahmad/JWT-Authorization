@@ -15,7 +15,7 @@ const generateToken = (user) => {
         user,
         process.env.ACCESS_SECRET,
         // config.get('jwt_secret.access',
-        {expiresIn: '36000s'}
+        {expiresIn: '3600s'}
         )
     
 }

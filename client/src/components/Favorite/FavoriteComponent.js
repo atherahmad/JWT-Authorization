@@ -15,9 +15,11 @@ export default function FavoriteComponent() {
 
     useEffect(()=>{
       axios.get("/api/favorite/detailedlist",{
-        headers:{
-          'Authorization': localStorage.getItem("accessToken")
-        }
+        
+          withCredentials:true,
+          credential:"include"
+  
+      
       })
       .then(response=>setMyFavoriteTeaList(response.data))
       .catch(err=>setAuthorized(false))

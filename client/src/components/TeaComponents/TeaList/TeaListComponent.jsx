@@ -17,8 +17,10 @@ function TeaListComponent(props) {
                 teaId:e.target.id
             },
             {
-                headers: 
-                    {"Authorization": localStorage.getItem("accessToken")  }
+                withCredentials:true,
+                credential:"include"
+                
+                    
                 })
         .then(response=>{
           if(response.data) {

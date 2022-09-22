@@ -24,10 +24,10 @@ function SigninComponent() {
     }
 
     const submitHandler = () =>{
-        console.log(userData)
 
         fetch("/api/auth/signin", {
     method: 'POST',
+    credentials:"include",
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
@@ -35,7 +35,6 @@ function SigninComponent() {
     body: JSON.stringify(userData)
   })
   .then(response=>{
-    console.log("cookies", Cookies.get("accessTok"))
     if(response.ok)return response.json()
     throw new Error(response.statusText)
 

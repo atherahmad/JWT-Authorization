@@ -24,7 +24,10 @@ const app = express();
 
  const PORT = 6068 || config.get('app.port') 
 
-app.use(cors())
+app.use(cors({
+    origin: "http://localhost:3000",
+    credentials : true
+}))
 // parsing the body with express bodyParser
 
 app.use(express.json())
